@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import jdk.jfr.Description;
 import org.junit.After;
@@ -22,6 +23,7 @@ public class CourierTest {
     }
 
     @Test
+    @DisplayName("Check create user")
     @Description("Create Courier and check response code")
     public void courierCanBeCreated(){
         ValidatableResponse response = courierClient.create(courier);
@@ -34,6 +36,7 @@ public class CourierTest {
     }
 
     @Test
+    @DisplayName("Check that the same create user can not be created twice")
     @Description("Create Courier twice with the same parameters and check that the error in response is received")
     public void courierCanNotBeCreatedTwiceWithTheSameLogin(){
         courierClient.create(courier);
@@ -46,6 +49,7 @@ public class CourierTest {
     }
 
     @Test
+    @DisplayName("Check create courier with the data of already existing courier")
     @Description("Create Courier by request which doesn't contain password and check that the error in response is received")
     public void courierCanNotBeCreatedWithoutPassword(){ //поменять
         courier.setPassword("");
@@ -56,6 +60,7 @@ public class CourierTest {
     }
 
     @Test
+    @DisplayName("Check login")
     @Description("Login with valid credentials and check response code")
     public void courierCanLoginWithValidCredentials(){
         courierClient.create(courier);
@@ -67,6 +72,7 @@ public class CourierTest {
     }
 
     @Test
+    @DisplayName("Check login with invalid password")
     @Description("Login with invalid password and check that the error in response is received")
     public void courierCanNotLoginWithIncorrectPassword(){
         courierClient.create(courier);
@@ -79,6 +85,7 @@ public class CourierTest {
                            .assertThat().body("message", equalTo("Учетная запись не найдена"));
     }
     @Test
+    @DisplayName("Check login without password")
     @Description("Login without password and check that the error in response is received")
     public void courierCanNotLoginWithoutPassword(){
         courierClient.create(courier);
@@ -92,6 +99,7 @@ public class CourierTest {
     }
 
     @Test
+    @DisplayName("Check login with nonExistent credentials")
     @Description("Login with nonExistent credentials and check that the error in response is received")
     public void nonExistentCourierCanNotLogin(){
         ValidatableResponse secondLoginResponse = courierClient.login(CourierCredentials.from(courier));

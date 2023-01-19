@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import jdk.jfr.Description;
 import org.junit.Before;
@@ -15,6 +16,7 @@ public class OrderTest {
         orderClient = new OrderClient();
     }
     @Test
+    @DisplayName("Check get all orders")
     @Description("Get orders and check that response body contains object orders")
     public void ordersCanBeReceived(){
         ValidatableResponse response = orderClient.getAll();

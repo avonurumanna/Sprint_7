@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import jdk.jfr.Description;
 import org.junit.After;
@@ -38,6 +39,7 @@ public class ParameterizedOrderTest {
 
     //добавить валидашку ответа
     @Test
+    @DisplayName("Check order create")
     @Description("Create Order and check response code")
     public void orderCanBeCreated() {
         ValidatableResponse response = orderClient.create(order);
